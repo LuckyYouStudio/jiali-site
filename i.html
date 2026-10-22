@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>邀请你加入家历</title>
+<meta property="og:title" content="家人邀请你加入「家历」">
+<meta property="og:description" content="和家人共享预约、纪念日和每天的安排">
+<style>
+  :root { --accent: #FF6B57; --bg: #FFF8F4; --card: #fff; --text: #1c1c1e; --muted: #8e8e93; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #000; --card: #1c1c1e; --text: #f2f2f7; --muted: #98989d; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 16px;
+         font-family: -apple-system, "PingFang SC", sans-serif; background: var(--bg); color: var(--text); }
+  .card { width: 100%; max-width: 380px; background: var(--card); border-radius: 28px; padding: 36px 24px; text-align: center;
+          box-shadow: 0 10px 40px rgba(255, 107, 87, .15); }
+  .logo { width: 84px; height: 84px; border-radius: 20px; margin: 0 auto 20px; display: block;
+          box-shadow: 0 6px 18px rgba(255,107,87,.25); }
+  h1 { font-size: 21px; margin: 0 0 8px; }
+  p { color: var(--muted); margin: 0 0 24px; font-size: 15px; line-height: 1.6; }
+  .code { font: 600 26px/1 ui-monospace, Menlo, monospace; letter-spacing: 4px; background: rgba(255,107,87,.1);
+          color: var(--accent); border-radius: 14px; padding: 14px; margin-bottom: 24px; user-select: all; }
+  a.btn { display: block; padding: 15px; border-radius: 16px; text-decoration: none; font-weight: 600; font-size: 17px; margin-top: 12px; }
+  .primary { background: var(--accent); color: #fff; }
+  .secondary { background: rgba(255,107,87,.12); color: var(--accent); }
+  .tip { font-size: 13px; margin-top: 20px; }
+</style>
+</head>
+<body>
+  <main class="card">
+    <img class="logo" src="logo.png" alt="家历">
+    <h1>家人邀请你加入「家历」</h1>
+    <p>加入后，你们可以一起查看和添加全家的预约、纪念日与日常安排。</p>
+    <div class="code" id="code">--------</div>
+    <a class="btn primary" id="open" href="#">在「家历」中打开</a>
+    <!-- 上架后替换为 App Store 链接 -->
+    <a class="btn secondary" href="https://apps.apple.com/cn/search?term=%E5%AE%B6%E5%8E%86">去 App Store 下载</a>
+    <p class="tip">安装后打开「家历」，在“家庭 › 用邀请码加入”中输入上方邀请码即可。<br>微信里打不开时，请点右上角“在 Safari 中打开”。</p>
+  </main>
+  <script>
+    const code = (new URLSearchParams(location.search).get('c') || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 12);
+    if (code) {
+      document.getElementById('code').textContent = code;
+      document.getElementById('open').href = 'jiali://invite/' + code;
+    }
+  </script>
+</body>
+</html>
